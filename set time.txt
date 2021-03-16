@@ -1,0 +1,112 @@
+======================================= Ok =======================================
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+p {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 0px;
+}
+</style>
+</head>
+<body>
+
+<p id="time"></p>
+
+<script>
+var upgradeTime = 10;
+var seconds = upgradeTime;
+function timer() {
+  var days        = Math.floor(seconds/24/60/60);
+  var hoursLeft   = Math.floor((seconds) - (days*86400));
+  var hours       = Math.floor(hoursLeft/3600);
+  var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+  var minutes     = Math.floor(minutesLeft/60);
+  var remainingSeconds = seconds % 60;
+  function pad(n) {
+    return (n < 10 ? "0" + n : n);
+  }
+  document.getElementById('time').innerHTML = pad(hours) + ":" + pad(minutes) + ":" + pad(remainingSeconds);
+  if (seconds == 0) {
+    clearInterval(countdownTimer);
+    document.getElementById('time').innerHTML = "Completed";
+  } else {
+    seconds--;
+  }
+}
+var countdownTimer = setInterval('timer()', 1000);
+</script>
+
+</body>
+</html>
+
+
+
+======================================= Trial =======================================
+
+var upgradeTime = 172801;
+var seconds = upgradeTime;
+function timer() {
+  var days        = Math.floor(seconds/24/60/60);
+  var hoursLeft   = Math.floor((seconds) - (days*86400));
+  var hours       = Math.floor(hoursLeft/3600);
+  var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+  var minutes     = Math.floor(minutesLeft/60);
+  var remainingSeconds = seconds % 60;
+  function pad(n) {
+    return (n < 10 ? "0" + n : n);
+  }
+  document.getElementById('countdown').innerHTML = pad(days) + ":" + pad(hours) + ":" + pad(minutes) + ":" + pad(remainingSeconds);
+  if (seconds == 0) {
+    clearInterval(countdownTimer);
+    document.getElementById('countdown').innerHTML = "Completed";
+  } else {
+    seconds--;
+  }
+}
+var countdownTimer = setInterval('timer()', 1000);
+
+
+
+
+function startTimer(duration, display) {
+    var start = Date.now(),
+        diff,
+        minutes,
+        seconds;
+    function timer() {
+        // get the number of seconds that have elapsed since 
+        // startTimer() was called
+        diff = duration - (((Date.now() - start) / 1000) | 0);
+
+        // does the same job as parseInt truncates the float
+        minutes = (diff / 60) | 0;
+        seconds = (diff % 60) | 0;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds; 
+
+        if (diff <= 0) {
+            // add one second so that the count down starts at the full duration
+            // example 05:00 not 04:59
+            start = Date.now() + 1000;
+        }
+    };
+    // we don't want to wait a full second before the timer starts
+    timer();
+    setInterval(timer, 1000);
+}
+
+window.onload = function time () {
+//function time() {
+    var fiveMinutes = 60 * 0.1,
+    
+         display = document.querySelector('#time');
+        //document.getElementByTagName("p");
+    startTimer(fiveMinutes, display);
+};

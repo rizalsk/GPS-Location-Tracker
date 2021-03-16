@@ -1,0 +1,8 @@
+gmail : dwikyakbar3@gmail.com
+password : stikombali
+
+
+=== cara laragon ssl frirefox
+1. go to about:config, 
+2. set security.enterprise_roots.enabled to true.
+
